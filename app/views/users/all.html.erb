@@ -1,0 +1,37 @@
+<div class="d-flex flex-column flex-md-row align-items-center px-md-4 mb-3 bg-white border-bottom box-shadow">
+  <h4 class="my-0 mr-md-auto font-weight-normal"><%= t :user_account %></h4>
+  <nav class='my-2 my-md-0 mr-md-3' >
+    <div class='row'>
+      <p class='p-2 text-dark'><%= link_to 'Достижения', inform_view_path, method: :get %></p>
+      <p class='p-2 text-dark'><%= link_to 'Добавить', inform_add_path, method: :get %></p>
+      <p class='p-2 text-dark'><%= link_to 'Выйти', destroy_user_session_path, method: :delete %></p>
+    </div>
+  </nav>  
+</div>
+<div class='container'>
+  <% unless @users.empty? %> 
+  <h4 class='text-center'>Зарегистрированные пользователи</h4>
+    <table class='table table-bordered table-hover'>
+      <thead>
+        <th>Пользователь</th>
+        <th>Почта</th>
+        <th>Тип аккаунта</th>
+        <th></th>
+      </thead>
+      <tbody class='table-hover'>
+        <% @users.each do |user| %>
+          <% unless user.key_role == 'admin' %>
+            <tr id='<%= user.id %>'>
+            <td><%= user.name + ' ' + user.surname %></td>
+            <td><%= user.email %></td>
+            <td><%= user.key_role %></td>   
+            <td><%= link_to 'Удалить', users_destroy_path(id: user.id), method: :delete, remote: true, class: 'delete_user' %> </td>     
+            </tr>
+          <% end %>  
+        <% end %>          
+      </tbody>
+    </table>
+  <% else %>
+    <%= 'Database is empty' %>
+  <% end %>
+</div>

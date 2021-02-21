@@ -1,0 +1,41 @@
+<div class="d-flex flex-column flex-md-row align-items-center px-md-4 mb-3 bg-white border-bottom box-shadow">
+  <h4 class="my-0 mr-md-auto font-weight-normal"><%= t :inform_view %></h4>
+  <nav class='my-2 my-md-0 mr-md-3' >
+    <div class='row'>
+      <% if user_signed_in? %>
+        <p class='h5 p-2 text-dark'><%= link_to t(:Account), root_url, method: :get, class: 'badge badge-primary' %></p>
+      <% else %>
+        <p class='h5 p-2 text-dark'><%= link_to t(:Authentication), new_user_session_path, method: :get, class: 'badge badge-primary' %></p>
+      <% end %>
+    </div>
+  </nav>  
+</div>
+<div class='container'> 
+  <h4 class='text-center'>Достижения учеников школы</h4>
+  <% unless @records.empty? %>
+  <table class='table table-bordered table-hover'>
+    <thead>
+      <th><div class='col-1'></div></th>
+      <th>Имя</th>
+      <th>Фамилия</th>
+      <th>Класс</th>
+      <th>Мероприятие</th>
+      <th>Достижение</th>
+    </thead>
+    <tbody>
+      <% @records.each do |elem| %>
+        <tr>
+          <th><%= elem.id %></th>
+          <td><%= elem.name %></td>
+          <td><%= elem.surname %></td>
+          <td><%= elem.classroom %></td>
+          <td><%= elem.activity %></td>
+          <td><%= elem.result %></td>
+        </tr>
+        <% end %>
+    </tbody>
+  </table>
+  <% else %>
+    <%= 'Database is empty' %>
+  <% end %>
+</div>

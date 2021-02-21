@@ -1,0 +1,34 @@
+<div class="d-flex flex-column flex-md-row align-items-center px-md-4 mb-3 bg-white border-bottom box-shadow">
+  <h4 class="my-0 mr-md-auto font-weight-normal"><%= t :inform_add %></h4>
+  <nav class='my-2 my-md-0 mr-md-3' >
+    <div class='row'>
+      <p class='h5 p-2 text-dark'><%= link_to t(:Progress), inform_view_path, method: :get, class: 'badge badge-primary' %></p>
+      <p class='h5 p-2 text-dark'><%= link_to t(:Account), root_url, method: :get, class: 'badge badge-primary' %></p>
+    </div>
+  </nav>  
+</div>
+  <%= form_tag url_for(controller: :inform, action: :create), method: 'get' do %>
+      <div class="form-group col-5">
+        <%= label_tag :name, t(:name) %>
+        <%= text_field_tag :name, nil, class: "form-control" %>
+      </div>
+      <div class="form-group col-5">
+        <%= label_tag :surname, t(:surname) %>
+        <%= text_field_tag :surname, nil, class: "form-control"%>
+      </div>
+      <div class="form-group col-5">
+        <%= label_tag :classroom, t(:classroom) %>
+        <%= select_tag :classroom, options_for_select(@classes), class: 'offset-1' %>
+      </div>
+      <div class="form-group col-5">
+        <%= label_tag :activity, t(:activity) %>
+        <%= text_field_tag :activity, nil, class: "form-control" %>
+      </div>
+      <div class="form-group col-5">
+        <%= label_tag :result, t(:result) %>
+        <%= select_tag :result, options_for_select(@res), class: 'offset-1' %>
+      </div>
+      <div class="form-group col-5">
+        <%= submit_tag 'Добавить', class: "btn btn-primary" %>
+      </div>
+  <% end %>   

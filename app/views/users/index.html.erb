@@ -1,0 +1,47 @@
+<div class="d-flex flex-column flex-md-row align-items-center px-md-4 mb-3 bg-white border-bottom box-shadow">
+  <h4 class="my-0 mr-md-auto font-weight-normal"><%= t :user_account %></h4>
+  <nav class='my-2 my-md-0 mr-md-3' >
+    <div class='row'>
+    <% if current_user.key_role == 'teacher' %>
+      <p class='h5 p-2 text-dark'><%= link_to t(:Progress), inform_view_path, method: :get, class: 'badge badge-primary' %></p>
+      <p class='h5 p-2 text-dark'><%= link_to t(:Add), inform_add_path, method: :get, class: 'badge badge-primary' %></p>
+      <p class='h5 p-2 text-dark'><%= link_to t(:Exit), destroy_user_session_path, method: :delete, class: 'badge badge-primary' %></p>
+    <% elsif current_user.key_role == 'student' %>
+      <p class='h5 p-2 text-dark'><%= link_to t(:Exit), destroy_user_session_path, method: :delete, class: 'badge badge-primary' %></p>
+    <% else %>
+      <p class='h5 p-2 text-dark'><%= link_to t(:Users), users_all_path, method: :get, class: 'badge badge-primary' %></p> 
+      <p class='h5 p-2 text-dark'><%= link_to t(:Exit), destroy_user_session_path, method: :delete, class: 'badge badge-primary' %></p>   
+    <% end %>
+    </div>
+  </nav>  
+</div>
+<div class='align-items-left col-5 offset-1'>
+  <div class='row'><p>Пользователь:         <%= current_user.name + " " + current_user.surname %></p></div>
+  <div class='row'><p>Тип аккаунта: <%= current_user.key_role %></div>
+  <div class='row'><p>Почта:        <%= current_user.email %></div>
+  <div class='row'>
+    <%= link_to t(:Update_profile), edit_user_registration_path, method: :get %>
+  </div>
+</div><br/>
+<div class='container col-7 align-items-center'>
+
+  <% if current_user.key_role == 'student'%>
+  <h4 class='-b-1 text-center'>Личные достижения</h4>
+    <table class='table table-bordered table-hover'>
+      <thead>
+        <th><div class='col-1'></div></th>
+        <th>Мероприятие</th>
+        <th>Достижение</th>
+      </thead>
+      <tbody>
+          <% @student.each do |row| %>
+            <tr>
+              <th style='width: 20px'><%= row.id %></th>
+              <td><%= row.activity %></td>
+              <td><%= row.result %></td>
+            </tr>
+          <% end %>          
+      </tbody>
+    </table>
+  <% end %>
+</div>

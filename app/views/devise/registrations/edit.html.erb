@@ -1,0 +1,58 @@
+<div class="d-flex flex-column flex-md-row align-items-center px-md-4 mb-3 bg-white border-bottom box-shadow">
+    <h4 class="my-0 mr-md-auto font-weight-normal"><%= t :edit_user_registration %></h4>
+    <nav class='my-2 my-md-0 mr-md-3' >
+      <div class='row'>
+        <p class='p-2 text-dark'><%= link_to "Назад", root_url, , class: 'badge badge-primary' %></p>
+      </div>
+    </nav>  
+  </div>
+
+<div class='container'>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+  
+    <div class='container'>
+      <div class='row form-group'>
+        <div class='col-2'><%= f.label :name, t(:name) %></div>
+        <div class='col-5'><%= f.text_field :name, autofocus: true, autocomplete: "name" %></div>
+      </div>
+      <div class='row form-group'>
+        <div class='col-2'><%= f.label :surname, t(:surname) %></div>
+        <div class='col-5'><%= f.text_field :surname, autocomplete: "surname" %></div>
+      </div>
+      <div class='row form-group'>
+        <div class='col-2'><%= f.label :middlename, t(:middlename) %></div>
+        <div class='col-5'><%= f.text_field :middlename, autocomplete: "middlename" %></div>
+      </div>
+      <!--For updating email 
+      <div class='row form-group'>
+        <div class='col-2'><%= f.label :email, t(:email) %></div>
+        <div class='col-5'><%= f.email_field :email, autocomplete: "email" %></div>
+      </div> -->
+      <div class='row form-group'>
+        <div class='col-2'><%= f.label :current_password, t(:current_password) %></div>
+        <div class='col-5'><%= f.password_field :current_password, autocomplete: "current-password" %></div>
+      </div>
+      <div class='row form-group'>
+        <div class='col-2'><%= f.label :password, t(:password) %></div>
+        <div class='col-5'><%= f.password_field :password, autocomplete: "new-password", placeholder: "leave blank to don't change it" %></div>
+      </div>
+      <div class='row form-group'>
+        <div class='col-2'><%= f.label :password_confirmation, t(:password_confirmation) %></div>
+        <div class='col-5'><%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "leave blank to don't change it" %></div>
+      </div>
+      <div class="actions">
+        <%= f.submit t(:Update), class: 'btn btn-primary' %>
+      </div>
+    </div>
+  
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <% end %>
+  <% end %>
+</div>
+<!-- <h3>Cancel my account</h3>
+
+ <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+
+ -->
